@@ -1,0 +1,39 @@
+<div class="menu" style="height:95%">
+  <div class="details" id="my_order">
+    <h3><a style="color: #f82249">My Orders</a></h3>
+    <div class="row" style="padding:20px">
+      <div class="col-lg-8" style="text-align: left;">
+        <p style="text-align:center; color:#f8e322;">Item</p>
+      </div>
+      <div class="col-lg-3">
+        <p style="text-align:center; color:#f8e322;">Qnt</p>
+      </div>
+      <div id="order_items" class="row col-12" style="padding:10px;max-height:33vh;overflow-y:auto">
+        {% for order in orders %}
+        <a id="O{{ order['item_id'] }}" class="col-10" style="text-align: left;color:{{ order['color'] }}">{{ order['slno'] }}. {{ order['item_name'] }}</a>
+        <a class="col-lg-2" style="text-align: center;left:10px;color:{{ order['color'] }}">{{ order['cnt'] }}</a>
+        {% endfor %}
+      </div>
+      <a id="confirm_order" class="item-list" style="background-color:green;border:white;"><b>Confirm Order</b></a>
+    </div>
+    <div class="social">
+      <h3 style="color: #08d11c;">Total Price : {{ tot_price }}</h3>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$("#confirm_order").click(function () {
+    $.ajax({
+      url: "/menu_order_list",
+      type: "get",
+      data: {confirm: 1},
+      success: function(response) {
+        $("#order_list").html(response);
+      },
+      error: function(xhr) {
+        //Do Something to handle error
+      }
+    });
+});
+</script>

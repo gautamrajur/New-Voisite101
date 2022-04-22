@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Voisite</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static',    filename='img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static',    filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{{ url_for('static',    filename='lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{{ url_for('static',    filename='lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/venobox/venobox.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{{ url_for('static',    filename='css/style.css') }}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <a href="/" class="scrollto"><img src="{{ url_for('static',    filename='img/logo.png') }}" alt="" title=""></a>
+        <a id="logo_text" href="/" class="about-btn scrollto" style="font-family:cursive;background-color:#f82249"><b>ಊಟದ ಮನೆ</b></a>
+        <a id="heading" class="about-btn scrollto" style="font-family:cursive;color:#FFD700;padding-left:10vh;padding-right:10vh"><b>ಅಡಿಗೆ ಮನೆ</b></a>
+      </div>
+
+      <nav id="nav-menu-container">
+        <!--<a id="home-btn" href="/" class="about-btn scrollto" style="font-family:cursive">Home</a>-->
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Main Section
+  ============================-->
+
+  <section id="main">
+  </section>
+
+  <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="{{ url_for('static',    filename='lib/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/jquery/jquery-migrate.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/easing/easing.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/superfish/hoverIntent.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/superfish/superfish.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/wow/wow.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/venobox/venobox.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+  <!-- Template Main Javascript File -->
+  <script type="text/javascript" src="{{ url_for('static',    filename='js/main.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',    filename='js/jquery.min.js') }}"></script>
+<script>
+
+    window.onload = function () {
+        kitchen_data_fun();
+    }
+
+    function kitchen_data_fun() {
+        $.ajax({
+          url: "/kitchen_data",
+          type: "get",
+          data: {jsdata: "None"},
+          success: function(response) {
+            $("#main").html(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+          }
+        });
+    }
+
+    function heading() {
+        $("#heading").hide();
+        if($("#heading").html() == "<b>ಅಡಿಗೆ ಮನೆ</b>")
+            $("#heading").html("<b>Kitchen</b>");
+        else if($("#heading").html() == "<b>Kitchen</b>")
+            $("#heading").html("<b>ಅಡಿಗೆ ಮನೆ</b>");
+        $("#heading").show();
+    }
+
+    $(document).ready(function() {
+        setInterval('kitchen_data_fun()', 20000);
+        setInterval('heading()', 3000);
+    });
+</script>
+</body>
+</html>

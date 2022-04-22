@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  <!--==========================
+    Main Section
+  ============================-->
+
+  {% extends "base.html" %}
+  {% block content %}
+
+    <div class="main-container wow fadeIn">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <div class="container wow fadeIn" style="left: 10vh;">
+            <div class="row">
+                <div  id="menu_container" class="row col-lg-9"></div>
+                <div id="order_list" class="col-lg-3"></div>
+            </div>
+        </div>
+    </div>
+
+<script>
+$(document).ready(function() {
+        setInterval('refreshOrderList()', 20000);
+    });
+
+function refreshOrderList() {
+    $.ajax({
+          url: "/menu_order_list",
+          type: "get",
+          data: {},
+          success: function(response) {
+            $("#order_list").html(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+          }
+    });
+}
+
+$(document).on('click', 'div', function () {
+    if(["C01","C02","C03","C04","C05","C06"].includes(String(this.id))){
+        $.ajax({
+          url: "/menu_items",
+          type: "get",
+          data: {jsdata: String(this.id)},
+          success: function(response) {
+            $("#menu_container").html(response);
+            console.log(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+          }
+        });
+    }
+});
+
+
+$(document).on('click', 'a', function () {
+    if(this.id[0]=='I') {
+        $.ajax({
+          url: "/menu_order_list",
+          type: "get",
+          data: {item_id: this.id},
+          success: function(response) {
+            $("#order_list").html(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+          }
+        });
+    }
+    if(this.id[0]=='O') {
+        $.ajax({
+          url: "/menu_order_list",
+          type: "get",
+          data: {del_id: this.id},
+          success: function(response) {
+            $("#order_list").html(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+          }
+        });
+    }
+});
+
+
+
+window.onload = menu_cat_fun();
+window.onload = order_list_fun();
+function menu_cat_fun() {
+        $.ajax({
+          url: "/menu_cat",
+          type: "get",
+          data: {jsdata: "None"},
+          success: function(response) {
+            $("#menu_container").html(response);
+            console.log(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+          }
+        });
+    }
+function order_list_fun() {
+        $.ajax({
+          url: "/menu_order_list",
+          type: "get",
+          data: {jsdata: "None"},
+          success: function(response) {
+            $("#order_list").html(response);
+            console.log(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+          }
+        });
+    }
+</script>
+
+  {% endblock %}
+
+</body>
+
+</html>

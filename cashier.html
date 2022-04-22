@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Voisite</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static',    filename='img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static',    filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{{ url_for('static',    filename='lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{{ url_for('static',    filename='lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/venobox/venobox.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{{ url_for('static',    filename='css/style.css') }}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <a href="/" class="scrollto"><img src="{{ url_for('static',    filename='img/logo.png') }}" alt="" title=""></a>
+        <a id="logo_text" href="/" class="about-btn scrollto" style="font-family:cursive;background-color:#f82249"><b>ಊಟದ ಮನೆ</b></a>
+        <a id="heading" class="about-btn scrollto" style="font-family:cursive;color:#FFD700;padding-left:10vh;padding-right:10vh"><b>ಕ್ಯಾಷಿಯರ್</b></a>
+      </div>
+
+      <nav id="nav-menu-container">
+        <!--<a id="home-btn" href="/" class="about-btn scrollto" style="font-family:cursive">Home</a>-->
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Main Section
+  ============================-->
+
+    <section id="main">
+        <div class="main-container wow fadeIn">
+        <div class="row" style="width:100%;margin-top:80px">
+        <div class="row col-12" style="overflow-y:auto;max-height:80vh;">
+        {% for order in orders %}
+        <div class="col-6" style="margin-bottom:2vh">
+        <div class="card mb-5 mb-lg-0">
+          <div class="card-body">
+            <a class="about-btn" style="font-family:cursive;color:#FFD700;background:#f82249;margin:0"><b>Table : {{ order[2] }}</b></a>
+            <a id="O{{ order[7][0] }}{{ order[0] }}" class="btn" style="font-family:cursive;color:white;background:#f82249;margin:0"><b>Order ID : {{ order[0] }}</b></a>
+            <hr>
+            <ul id="{{ order[7][0] }}{{ order[0] }}" class="fa-ul" style="margin:0;padding:0 10px;text-align:left">
+                <li class="row">
+                    <a class="col-6">Customer Name</a>
+                    <b class="col-6">: Akshay G J</b>
+                </li>
+                <li class="row">
+                    <a class="col-6">Phone Number</a>
+                    <a class="col-6">: {{ order[1] }}</a>
+                </li>
+                <li class="row">
+                    <a class="col-6">Total Price</a>
+                    <b class="col-6">: {{ order[5] }}</b>
+                </li>
+                <li class="row">
+                    <a class="col-6">Transaction Type</a>
+                    <a class="col-6">: {{ order[3] }}</a>
+                </li>
+                <li class="row">
+                    <a class="col-6">Transaction ID</a>
+                    <a class="col-6">: {{ order[4] }}</a>
+                </li>
+                <li class="row">
+                    <a class="col-6">Time</a>
+                    <a class="col-6">: {{ order[6] }}</a>
+                </li>
+                <li class="row">
+                    <a class="col-6">Payment Status</a>
+                    <b class="col-6">: {{ order[7] }}</b>
+                </li>
+            <hr>
+            </ul>
+            <button id="A{{ order[7][0] }}{{ order[0] }}" onclick="accept(this.id);" type="button" class="btn" style="margin-bottom:5px;padding:6px;width:90%">Accept Payment</button>
+            <button id="S{{ order[7][0] }}{{ order[0] }}" onclick="show_fun(this.id);" type="button" class="btn" style="margin-bottom:5px;padding:6px;width:90%;background:green">Show Details</button>
+            <button id="H{{ order[7][0] }}{{ order[0] }}" onclick="hide_fun(this.id);" type="button" class="btn" style="margin-bottom:5px;padding:6px;width:90%;background:green">Hide Details</button>
+          </div>
+        </div>
+        </div>
+        {% endfor %}
+        </div>
+        </div>
+        </div>
+
+  </section>
+
+  <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="{{ url_for('static',    filename='lib/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/jquery/jquery-migrate.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/easing/easing.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/superfish/hoverIntent.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/superfish/superfish.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/wow/wow.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/venobox/venobox.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+  <!-- Template Main Javascript File -->
+  <script type="text/javascript" src="{{ url_for('static',    filename='js/main.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',    filename='js/jquery.min.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+
+    window.onload = function () {
+        $("[id^='OD']").css('background','green');
+        $("[id^='D']").hide();
+        $("[id^='AD']").hide();
+        $("[id^='SP']").hide();
+        $("[id^='H']").hide();
+    }
+
+    function accept(id) {
+        id_new = id.slice(1,);
+        oid = id.slice(2,);
+        $.ajax({
+            url: "/cashier",
+            type: "get",
+            data: {order_id : oid},
+            success: function(response) {
+                location.reload();
+            },
+            error: function(xhr) {
+            //Do Something to handle error
+            }
+        });
+        $('#'+id_new).hide();
+        $('#O'+id_new).css('background','green');
+        $('#'+id).hide();
+        $('#S'+id_new).show();
+    }
+
+    function hide_fun(id) {
+        id_new = id.slice(1,);
+        $('#'+id_new).hide();
+        $('#S'+id_new).show();
+        $('#'+id).hide();
+    }
+
+    function show_fun(id) {
+        id_new = id.slice(1,);
+        $('#'+id_new).show();
+        $('#H'+id_new).show();
+        $('#'+id).hide();
+    }
+
+    function heading() {
+        $("#heading").hide();
+        if($("#heading").html() == "<b>ಕ್ಯಾಷಿಯರ್</b>")
+            $("#heading").html("<b>Cashier</b>");
+        else if($("#heading").html() == "<b>Cashier</b>")
+            $("#heading").html("<b>ಕ್ಯಾಷಿಯರ್</b>");
+        $("#heading").show();
+    }
+    $(document).ready(function() {
+        setInterval('location.reload()', 60000);
+        setInterval('heading()', 3000);
+    });
+
+</script>
+</body>
+</html>

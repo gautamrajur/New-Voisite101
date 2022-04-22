@@ -1,0 +1,17 @@
+<div class="col-12">
+    <h1 id="title" class="mb-4 pb-0 app" style="font-family:cursive; left: -20vh;"><span>Menu</span></h1>
+</div>
+
+{% for Cat in Category %}
+  <div class="col-lg-4 col-md-6" id="{{ Cat[0][16:19] }}">
+    <div class="menu">
+      <img src="{{ Cat[0] }}" alt="{{ Cat[1] }}" class="img-fluid">
+      <div class="details">
+        <h3><a>{{ Cat[1] }}</a></h3>
+        <div class="social">
+          <a>{{ Cat[2] }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Voisite</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static',    filename='img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static',    filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{{ url_for('static',    filename='lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{{ url_for('static',    filename='lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/venobox/venobox.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{{ url_for('static',    filename='css/style.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <a href="/" class="scrollto"><img src="{{ url_for('static',    filename='img/logo.png') }}" alt="" title=""></a>
+        <a id="logo_text" href="/" class="about-btn scrollto" style="font-family:cursive;background-color:#f82249"><b>ಊಟದ ಮನೆ</b></a>
+        <a id="table_id" onclick="alert('Your Table ID is 01');" class="about-btn scrollto" style="font-family:cursive;color:#FFD700"><b>Table : 01</b></a>
+      </div>
+
+      <nav id="nav-menu-container">
+        <a id="home-btn" href="/" class="about-btn scrollto" style="font-family:cursive">Home</a>
+        <a id="menu-btn" href="{{ url_for('menu') }}" class="about-btn scrollto" style="font-family:cursive">Menu</a>
+        <a id="get_the_bill-btn" href="{{ url_for('bill') }}" class="about-btn scrollto" style="font-family:cursive">Get the Bill</a>
+        <a id="call_us-btn" href="{{ url_for('call_us') }}" class="about-btn scrollto" style="font-family:cursive">Call Us !</a>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Main Section
+  ============================-->
+
+  <section id="main">
+
+      {% block content %}
+      {% endblock %}
+
+    <div class="voice_bar-container wow fadeIn">
+
+      <h1 class="no-browser-support" style="font-size: 30px;">Sorry, Your <span>Browser Doesn't Support</span>  the <span>Web Speech API</span>.<br>Try Opening This Application In <span>Google Chrome</span>.</h1>
+
+      <a class="play-btn mb-4 fa fa-microphone app" id="start-record-btn-1" ></a>
+
+      <input id="input-area" class="voice-input app" placeholder="You can use your Voice or Start typing to interact with the system ...." style="font-family:cursive; font-size:18px; width:55%;"></input>
+
+      <a class="play-btn mb-4 fa fa-microphone app" id="start-record-btn-2" ></a>
+
+    </div>
+
+    <div class="instruction_bar-container wow fadeIn">
+
+      <a id="recording-instructions" href="#" class="voice-input" style="font-family:cursive; color:white;">Press the <strong>red</strong> button or start with <strong>Hey Ram</strong>, to interact with our <strong>Virtual Waiter</strong>.</a>
+
+    </div>
+
+  </section>
+
+  <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="{{ url_for('static',    filename='lib/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/jquery/jquery-migrate.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/easing/easing.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/superfish/hoverIntent.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/superfish/superfish.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/wow/wow.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/venobox/venobox.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+  <!-- Template Main Javascript File -->
+  <script type="text/javascript" src="{{ url_for('static',    filename='js/main.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',    filename='js/script.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',    filename='js/jquery.min.js') }}"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+trig_order = 1;
+trig_change = 0;
+trig_trans_id = 0;
+var order_ids = {}
+recognition.onresult = function(event) {
+
+  instructions.text('Voice recognition activated. Try speaking into the microphone.');
+  // event is a SpeechRecognitionEvent object.
+  // It holds all the lines we have captured so far.
+  // We only need the current one.
+  var current = event.resultIndex;
+  // Get a transcript of what was said.
+  var transcript = event.results[current][0].transcript;
+
+  if((transcript.trim().slice(1,8).trim()).toLowerCase()=="hey ram")
+    listen = transcript.slice(9,).trim();
+  else if((transcript.trim().slice(0,7).trim()).toLowerCase()=="hey ram")
+    listen =  transcript.slice(8,).trim();
+  else if (trig_listen) {
+    listen =  transcript.trim();
+    if(trig_order)
+      trig_listen = 0;
+  }
+  else
+    instructions.text("I couldn't get you, Can you please repeat.");
+
+  // Add the current transcript to the contents of our Note.
+  // There is a weird bug on mobile, where everything is repeated twice.
+  // There is no official solution so far so we have to handle an edge case.
+  var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
+
+  if(!mobileRepeatBug) {
+    //noteContent += transcript;
+    noteContent = transcript;
+
+    noteTextarea.val(listen);
+
+    if($('#input-area').val().length!=0) {
+
+      $.ajax({
+        url: "/voice",
+        type: "get",
+        data: {voice_data : listen},
+        success: function(response) {
+          if(trig_order) {
+            alert(response);
+            if(["call_us","","menu","bill"].includes(String(response))) {
+              window.location.href = "/"+response;
+            }
+            else if(['take_my_order','track_my_order'].includes(String(response))) {
+              $('#input-area').css('background','orange');
+              $('#input-area').css('color','white');
+              trig_listen = 1;
+              trig_order = 0;
+            }
+            else if(['transaction_id'].includes(String(response))) {
+              $('#trans_id').css('background','green');
+              $('#trans_id').css('color','white');
+              trig_listen = 1;
+              trig_order = 0;
+              trig_trans_id = 1;
+            }
+            else if(['change_my_order','modify_my_order'].includes(String(response))) {
+              $('#input-area').css('background','red');
+              $('#input-area').css('color','white');
+              trig_listen = 1;
+              trig_order = 0;
+              trig_change = 1;
+            }
+            else if(['confirm_order','confirm_my_order'].includes(String(response))) {
+              $.ajax({
+                url: "/menu_order_list",
+                type: "get",
+                data: {confirm: 1},
+                success: function(response) {
+                  $("#order_list").html(response);
+                },
+                error: function(xhr) {
+                  //Do Something to handle error
+                }
+              });
+            }
+            else if(response[0]=='I') {
+              item_id = response;
+              $.ajax({
+                url: "/menu_order_list",
+                type: "get",
+                data: {item_id: item_id},
+                success: function(response) {
+                  $("#order_list").html(response);
+                },
+                error: function(xhr) {
+                  //Do Something to handle error
+                }
+              });
+            }
+            else
+              $('#'+response).click();
+          }
+          else {
+            if('done'==String(response)) {
+              $('#input-area').css('background','white');
+              $('#input-area').css('color','#f82249');
+              trig_listen = 0;
+              trig_order = 1;
+              trig_change = 0;
+            }
+            else if(trig_trans_id) {
+              $('#trans_id').val(listen);
+              $('#trans_id').css('background','white');
+              $('#trans_id').css('color','#f82249');
+
+              trig_listen = 0;
+              trig_order = 1;
+              trig_trans_id = 0;
+            }
+            else if(trig_change) {
+              alert("Item Name : "+listen);
+
+              item_id = 'O'+response;
+              $.ajax({
+                url: "/menu_order_list",
+                type: "get",
+                data: {del_id: item_id},
+                success: function(response) {
+                  $("#order_list").html(response);
+                },
+                error: function(xhr) {
+                  //Do Something to handle error
+                }
+              });
+            }
+            else {
+              alert("Item Name : "+listen);
+              order_ids[response]=1;
+
+              item_id = response;
+              $.ajax({
+                url: "/menu_order_list",
+                type: "get",
+                data: {item_id: item_id},
+                success: function(response) {
+                  $("#order_list").html(response);
+                },
+                error: function(xhr) {
+                  //Do Something to handle error
+                }
+              });
+            }
+          }
+
+          $('#input-area').val('');
+        },
+        error: function(xhr) {
+        //Do Something to handle error
+        }
+      });
+    }
+  }
+};
+
+</script>
+</body>
+</html>

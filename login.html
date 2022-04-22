@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Voisite</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static',    filename='img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static',    filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{{ url_for('static',    filename='lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{{ url_for('static',    filename='lib/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/venobox/venobox.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static',    filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{{ url_for('static',    filename='css/style.css') }}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <a href="/" class="scrollto"><img src="{{ url_for('static',    filename='img/logo.png') }}" alt="" title=""></a>
+        <a id="logo_text" href="/" class="about-btn scrollto" style="font-family:cursive;background-color:#f82249"><b>ಊಟದ ಮನೆ</b></a>
+        <a id="table_id" onclick="alert('Your Table ID is 01');" class="about-btn scrollto" style="font-family:cursive;color:#FFD700"><b>Table : 01</b></a>
+      </div>
+
+      <nav id="nav-menu-container">
+        <a id="call_us-btn" href="{{ url_for('call_us') }}" class="about-btn scrollto" style="font-family:cursive">Call Us !</a>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Main Section
+  ============================-->
+
+  <section id="main" style="background: url({{ url_for('static',    filename='img/intro-bg.jpg') }})top center;">
+
+    <div class="main-container wow fadeIn">
+      <h1 class="mb-4 pb-0" style="font-family:cursive">Hey, <span>Welcome</span></h1>
+      <p class="mb-4 pb-0">Let's begin by Signing in</p>
+
+      <div class="col-3">
+      <a id="sign_in" class="col-5 voice-input" data-toggle="modal" data-target="#sign-in-modal" style="font-family:cursive; color:white;">Sign in</a>
+      <a id="sign_up" class="col-5 voice-input" data-toggle="modal" data-target="#sign-in-modal" style="font-family:cursive; color:white;">Sign Up</a>
+        <!-- Modal Order Form -->
+      <div id="sign-in-modal" class="modal fade">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Sign In</h4>
+              <button id="close_modal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" style="margin:0px; text-align:center">
+                    <input id="ph_num" class="voice-input col-10" placeholder="Enter your Phone Number" style="font-family:cursive; font-size:15px;"/>
+                </div>
+                <div class="form-group" style="margin:10px;text-align:center">
+                  <img src="{{ url_for('video_feed') }}"  style="height: 40vh;width: 80%;">
+                      <!-- <video autoplay="true" class="col-10 voice-input" id="videoElement" style="margin:0px;padding:0px;border-radius:30px;">
+
+                      </video> -->
+                </div>
+                <div class="form-group" style="margin:0px;text-align:center">
+                  <label id="failed" class="col-10" style="background:yellow;border-radius:20px;">
+                    <label id="failed1" class="btn" style="padding:10px 0px 0px 0px;color:red"><b>Login Failed</b></label><br>
+                    <label id="failed2" class="btn" style="padding:0px;color:blue">Please Enter correct Phone Number</label>
+                  </label>
+                </div>
+                <div class="text-center">
+                  <button id="submit" class="btn col-3" style="background:green;border-radius:20px;color:white">Submit</button>
+                </div>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      </div>
+    </div>
+
+    <div class="voice_bar-container wow fadeIn">
+
+      <h1 class="no-browser-support" style="font-size: 30px;">Sorry, Your <span>Browser Doesn't Support</span>  the <span>Web Speech API</span>.<br>Try Opening This Application In <span>Google Chrome</span>.</h1>
+
+      <a class="play-btn mb-4 fa fa-microphone app" id="start-record-btn-1" ></a>
+
+      <input id="input-area" class="voice-input app" placeholder="You can use your Voice or Start typing to interact with the system ...." style="font-family:cursive; font-size:18px; width:55%;"></input>
+
+      <a class="play-btn mb-4 fa fa-microphone app" id="start-record-btn-2" ></a>
+
+    </div>
+
+    <div class="instruction_bar-container wow fadeIn">
+
+      <a id="recording-instructions" href="#" class="voice-input" style="font-family:cursive; color:white;">Press the <strong>red</strong> button or start with <strong>Hey Ram</strong>, to interact with our <strong>Virtual Waiter</strong>.</a>
+
+    </div>
+  </section>
+
+  <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="{{ url_for('static',    filename='lib/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/jquery/jquery-migrate.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/easing/easing.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/superfish/hoverIntent.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/superfish/superfish.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/wow/wow.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/venobox/venobox.min.js') }}"></script>
+  <script src="{{ url_for('static',    filename='lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+  <!-- Template Main Javascript File -->
+  <script type="text/javascript" src="{{ url_for('static',    filename='js/main.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',    filename='js/script.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static',    filename='js/jquery.min.js') }}"></script>
+
+<script>
+trig_ph_num = 0;
+var video = document.querySelector("#videoElement");
+
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+}
+
+recognition.onresult = function(event) {
+
+  instructions.text('Voice recognition activated. Try speaking into the microphone.');
+  // event is a SpeechRecognitionEvent object.
+  // It holds all the lines we have captured so far.
+  // We only need the current one.
+  var current = event.resultIndex;
+  // Get a transcript of what was said.
+  var transcript = event.results[current][0].transcript;
+
+  if((transcript.trim().slice(1,8).trim()).toLowerCase()=="hey ram")
+    listen = transcript.slice(9,).trim();
+  else if((transcript.trim().slice(0,7).trim()).toLowerCase()=="hey ram")
+    listen =  transcript.slice(8,).trim();
+  else if (trig_listen) {
+    listen =  transcript.trim();
+    trig_listen = 0;
+  }
+  else
+    instructions.text("I couldn't get you, Can you please repeat.");
+
+  // Add the current transcript to the contents of our Note.
+  // There is a weird bug on mobile, where everything is repeated twice.
+  // There is no official solution so far so we have to handle an edge case.
+  var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
+
+  if(!mobileRepeatBug) {
+    //noteContent += transcript;
+    noteContent = transcript;
+
+    noteTextarea.val(listen);
+
+    if($('#input-area').val().length!=0) {
+
+      $.ajax({
+        url: "/voice",
+        type: "get",
+        data: {voice_data : listen},
+        success: function(response) {
+          alert(response);
+          if(trig_ph_num) {
+            $('#ph_num').val(response);
+            $('#ph_num').css('background','white');
+            $('#ph_num').css('color','#f82249');
+            trig_listen = 0;
+            trig_ph_num = 0;
+          }
+          else {
+            if(["call_us","","menu","bill"].includes(String(response))) {
+              window.location.href = "/"+response;
+            }
+            else if(['sign_in'].includes(String(response))) {
+              $('#sign_in').click();
+              $('#sign-in-modal').modal('show');
+            }
+            else if(['phone','number'].includes(String(response))) {
+              $('#ph_num').css('background','green');
+              $('#ph_num').css('color','white');
+              trig_listen = 1;
+              trig_ph_num = 1;
+            }
+            else
+              $('#'+response).click();
+          }
+        },
+        error: function(xhr) {
+          //Do Something to handle error
+        }
+      });
+    }
+  }
+};
+$('#failed').hide();
+
+$('#sign_in').click(function() {
+
+  $.ajax({
+    url: "/face",
+    type: "get",
+    data: {detect: 1},
+    success: function(response) {
+    },
+    error: function(xhr) {
+      //Do Something to handle error
+    }
+  });
+});
+$("#submit").click(function () {
+    $('#failed').hide();
+    if($('#ph_num').val().length != 0)
+      cid = $('#ph_num').val();
+    else
+      cid = 0000;
+    $.ajax({
+      url: "/",
+      type: "get",
+      data: {jsdata: cid},
+      success: function(response) {
+        if(String(response) == "failed") {
+          $('#failed').show();
+          $('#ph_num').val('');
+        }
+        else {
+            document.write(response);
+            window.onload = location.reload(true);
+         }
+      },
+      error: function(xhr) {
+        //Do Something to handle error
+      }
+    });
+});
+</script>
+
+</body>
+
+</html>

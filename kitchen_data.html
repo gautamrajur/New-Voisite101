@@ -1,0 +1,98 @@
+<div class="main-container wow fadeIn">
+<div class="row" style="width:100%;margin-top:80px">
+    <div class="row col-10" style="overflow-y:auto;max-height:80vh;">
+    {% for order_id in orders.keys() %}
+      <div class="col-6" style="margin-bottom:3vh">
+        <div class="card mb-5 mb-lg-0">
+          <div class="card-body">
+            <a class="about-btn" style="font-family:cursive;color:#FFD700;background:#f82249;margin:0"><b>Table : {{ orders[order_id][0][3] }}</b></a>
+            <a class="card-title text-muted text-uppercase text-center" style="margin-left:15%;">Order ID : {{ order_id }}</a>
+            <hr>
+            <ul class="fa-ul" style="margin:0;padding:0 10px;">
+                <li class="row">
+                    <b class="col-6">Item</b>
+                    <b class="col-3">Qnt</b>
+                    <b class="col-3">Status</b>
+                </li>
+            </ul>
+            <ul class="fa-ul" style="max-height:47vh;margin:0;padding:0 15px;overflow-y:auto">
+                {% for order in orders[order_id] %}
+                    <li class="row">
+                        <div class="col-6" style="text-align:left">{{ order[6] }}. {{ order[7] }}</div>
+                        <div class="col-3">{{ order[2] }}</div>
+                        <button id="A{{ order[5][0] }}{{ order[0] }}{{ order[4] }}" type="button" class="btn col-3" style="background:yellow;color:black">Accept</button>
+                        <button id="S{{ order[5][0] }}{{ order[0] }}{{ order[4] }}" type="button" class="btn col-3" style="background:green;">Serve</button>
+                        <div id="D{{ order[5][0] }}{{ order[0] }}{{ order[4] }}" class="col-3" style="color:green;"><b>Served </b><i class="fa fa-check"></i></div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <hr>
+            <button onclick="kitchen_data_fun();" type="button" class="btn" style="margin-bottom:5px;padding:6px;width:90%">Done</button>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+<div id="Orders_Served" class="col-2">
+    <div class="card mb-5 mb-lg-0" style="background:white;border:5px solid #f82249;border-radius:10px">
+      <div class="card-body" style="padding:10px;">
+          <h6 class="card-price text-center" style="color:#f82249"><b>Orders Served</b></h6>
+          <hr>
+          <div style="overflow-y:auto;height:60vh;">
+          {% for order_id in orders_served %}
+            <button id="" type="button" class="btn" style="margin-bottom:5px;padding:6px;width:90%">{{ order_id[0] }}</button>
+          {% endfor %}
+          </div>
+          <hr>
+      </div>
+    </div>
+</div>
+</div>
+  </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    $("[id^='AA']").hide();
+    $("[id^='AS']").hide();
+    $("[id^='SO']").hide();
+    $("[id^='SS']").hide();
+    $("[id^='DO']").hide();
+    $("[id^='DA']").hide();
+
+    $("[id^='A']").click(function () {
+        id = 'S'+this.id.slice(1,);
+
+        $.ajax({
+          url: "/kitchen_data",
+          type: "get",
+          data: {Accept:this.id.slice(14,),order_id:this.id.slice(2,14)},
+          success: function(response) {
+            //$("#main").html(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+          }
+        });
+
+        $("#"+this.id).hide();
+        $("#"+id).show();
+    });
+
+    $("[id^='S']").click(function () {
+        id = 'D'+this.id.slice(1,);
+
+        $.ajax({
+          url: "/kitchen_data",
+          type: "get",
+          data: {Serve:this.id.slice(14,),order_id:this.id.slice(2,14)},
+          success: function(response) {
+            //$("#main").html(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+          }
+        });
+
+        $("#"+this.id).hide();
+        $("#"+id).show();
+    });
+</script>

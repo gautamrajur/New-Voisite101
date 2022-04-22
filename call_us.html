@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  <!--==========================
+    Main Section
+  ============================-->
+
+  {% extends "base.html" %}
+  {% block content %}
+
+    <div class="main-container wow fadeIn">
+      
+      <h1 class="mb-4 pb-0 app" style="font-family:cursive"><span>On the way ...!</span></h1>
+      <img src="{{ url_for('static',    filename='GIFs/order_delivery_2.gif') }}" style="height:40vh">
+
+    </div>
+  {% endblock %}
+
+</body>
+
+</html>
